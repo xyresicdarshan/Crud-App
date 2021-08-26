@@ -41,7 +41,7 @@ namespace Crud_App.service
             List<EmployeeViewModel> ev = new List<EmployeeViewModel>();
             foreach (var input in inputs)
             {
-                EmployeeViewModel formView = new EmployeeViewModel()
+                EmployeeViewModel EmployeeView = new EmployeeViewModel()
                 {
                     EmployeeId = input.EmployeeId,
                     EmployeeName = input.EmployeeName,
@@ -51,9 +51,69 @@ namespace Crud_App.service
                     Tos = input.Tos,
                     Wfh = input.Wfh
                 };
-                ev.Add(formView);
+                ev.Add(EmployeeView);
             }
             return ev;
+        }
+
+        public EmployeeViewModel GetEmployee(int id)
+        {
+            var input = db.Employees.Where(s => s.EmployeeId == id).FirstOrDefault();
+            if (input != null)
+            {
+                EmployeeViewModel EmployeeView = new EmployeeViewModel()
+                {
+                    EmployeeId = input.EmployeeId,
+                    EmployeeName = input.EmployeeName,
+                    EmployeeEmail = input.EmployeeEmail,
+                    Department = input.Department,
+                    Designation = input.Designation,
+                    Tos = input.Tos,
+                    Wfh = input.Wfh
+                };
+                return EmployeeView;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public int UpdateEmployee(EmployeeViewModel model)
+        {
+            var input = db.Employees.Where(s => s.EmployeeId == model.EmployeeId).FirstOrDefault();
+            if (input != null)
+            {
+                input.EmployeeId = model.EmployeeId;
+                input.EmployeeName = model.EmployeeName;
+                input.EmployeeEmail = model.EmployeeEmail;
+                input.Department = model.Department;
+                input.Designation = model.Designation;
+                input.Tos = model.Tos;
+                input.Wfh = model.Wfh;
+
+                db.Entry<Employee>(input).State = System.Data.Entity.EntityState.Modified;
+                return db.SaveChanges();
+
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
+        public int DeleteEmployee(int id)
+        {
+            var input = db.Employees.Where(s => s.EmployeeId == id).FirstOrDefault();
+            if (input != null)
+            {
+                db.Employees.Remove(input);
+                return db.SaveChanges();
+            }
+            else
+            {
+                return 0;
+            }
         }
     }
 }

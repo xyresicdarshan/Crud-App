@@ -54,6 +54,10 @@ namespace Crud_App
             bundles.Add(new ScriptBundle("~/bundles/List").Include(
                     "~/Scripts/Ng/Service/EmployeeDataService.js",
                     "~/Scripts/Ng/Controller/ListCtrl.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/View").Include(
+                    "~/Scripts/Ng/Service/EmployeeDataService.js",
+                    "~/Scripts/Ng/Controller/ViewCtrl.js"));
         }
     }
 }

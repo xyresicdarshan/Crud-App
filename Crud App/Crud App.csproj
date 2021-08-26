@@ -156,7 +156,6 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\EmployeeService.cs" />
-    <Compile Include="Service\EmployeeServiceBase.cs" />
     <Compile Include="ViewModel\EmployeeViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1035,7 +1034,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\EmployeeApi\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -1052,7 +1050,7 @@
     <TypeScriptCompile Include="Scripts\Ng\BaseController.ts" />
     <TypeScriptCompile Include="Scripts\Ng\Controller\EmployeeCtrl.ts" />
     <TypeScriptCompile Include="Scripts\Ng\Controller\ListCtrl.ts" />
-    <TypeScriptCompile Include="Scripts\Ng\Controller\ViwCtrl.ts" />
+    <TypeScriptCompile Include="Scripts\Ng\Controller\ViewCtrl.ts" />
     <TypeScriptCompile Include="Scripts\Ng\Model\EmployeeModel.ts" />
     <TypeScriptCompile Include="Scripts\Ng\Service\EmployeeDataService.ts" />
     <TypeScriptCompile Include="Scripts\Ng\Site.ts" />

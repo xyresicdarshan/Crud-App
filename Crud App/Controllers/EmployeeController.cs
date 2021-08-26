@@ -17,8 +17,10 @@ namespace Crud_App.Controllers
         {
             return View();
         }
-        public ActionResult ViewEmployee()
+        public ActionResult ViewEmployee(int id, bool flag)
         {
+            ViewBag.Id = id;
+            ViewBag.Flag = flag;
             return View();
         }
     }

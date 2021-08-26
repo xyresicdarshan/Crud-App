@@ -21,5 +21,24 @@ namespace Crud_App.Controllers
             var result = service.GetEmployeeList();
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult GetEmployee(int id)
+        {
+            var result = service.GetEmployee(id);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult UpdateEmployee(EmployeeViewModel model)
+        {
+
+            var result = service.UpdateEmployee(model);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult DeleteEmployee(int id)
+        {
+            var result = service.DeleteEmployee(id);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
     }
 }

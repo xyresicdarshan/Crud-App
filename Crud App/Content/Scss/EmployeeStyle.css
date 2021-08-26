@@ -52,4 +52,7 @@ body .table tr:nth-child(even) {
   background-color: #ffffff; }
 
 body .chkbtn {
-  color: aqua; }
+  color: black; }
+
+body .dx-icon {
+  color: blue; }

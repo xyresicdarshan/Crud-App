@@ -66,15 +66,113 @@ module EmployeeAppExtension {
             $("#gridContainer").dxDataGrid({
                 dataSource: this.employeeList,
                 keyExpr: 'EmployeeId',
-                columns: [{ caption: "Employee Name", dataField: "EmployeeName" },
+                columns: [
+                    { caption: "Employee Name", dataField: "EmployeeName" },
                     { caption: "Employee Email", dataField: "EmployeeEmail" },
                     { caption: "Designation", dataField: "Designation" },
                     { caption: "Department", dataField: "Department" },
                     { caption: "T & S", dataField: "Tos" },
                     { caption: "Work From Home", dataField: "Wfh" },
-                    ],
+                    {
+                        caption: "",
+                        minWidth: 325,
+                        cellTemplate:  (container, options)=> {
+                            container.addClass("chart-cell");
+                            console.log("rowc clci", options.data);
+                            //View Button
+                            $("<div/>").dxButton({
+                                icon: "check",
+                                type: "default",
+                                text: "View",
+                                onClick: (e) => {
+                                    this.ViewEmployee(options.data.EmployeeId);
+                                   
+                                }
+                            }).appendTo(container);
+                            //-
+                            //Update Button
+                            $("<div/>").dxButton({
+                                icon: "edit",
+                                type: "success",
+                                text: "Update",
+                                onClick: (e) => {
+                                    this.UpdateEmployee(options.data.EmployeeId);
+                                   
+                                }
+                            }).appendTo(container);
+                            //-
+                            //Delete Button
+                            $("<div/>").dxButton({
+                                icon: "trash",
+                                type: "danger",
+                                text: "Delete",
+                                onClick: (e) => {
+                                    this.DeleteEmployee(options.data.EmployeeId);
+                                }
+                            }).appendTo(container);
+                        }
+                    }
+                ],
+                paging: {
+                    pageSize:10
+                },
+                
                 showBorders: true
             });
+      
+        }
+        ViewEmployee = (id: number) => {
+            this.ShowInput(id);
+            console.log(id);
+            this.dataSvc.GetEmployee(id).then((data) => {
+                console.log(data);
+                this.$scope.project = data;
+            }).catch((error) => {
+                console.log(error);
+            }).finally(() => {
+
+            })
+        }
+
+        UpdateEmployee = (id) => {
+            this.ShowInput(id);
+            this.dataSvc.UpdateEmployee(id).then((data) => {
+                console.log(data);
+            }).catch((error) => {
+                console.log(error);
+            }).finally(() => {
+
+            })
+        }
+
+        DeleteEmployee = (id) => {
+
+            var confirm = this.$mdDialog.confirm()
+                .title('Would you like to delete')
+                .textContent('')
+                .ariaLabel('')
+
+                .targetEvent(null)
+                .ok('Yes')
+                .cancel('Cancel');
+
+            this.$mdDialog.show(confirm).then(() => {
+                this.dataSvc.DeleteEmployee(id).then((data) => {
+                    this.showWarning("Deleted Sucessfully");
+                    console.log(data);
+                    this.GetEmployeeList();
+                }).catch((error) => {
+                    console.log(error);
+                }).finally(() => {
+
+                })
+            }, () => {
+            });
+        }
+          
+
+        ShowInput = (id: number) => {
+            window.location.href = "/Employee/ViewEmployee/" + id;
         }
     }
 

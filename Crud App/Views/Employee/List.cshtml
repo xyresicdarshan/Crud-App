@@ -1,28 +1,23 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "List";
 }
 @section HeadContent{
     @Styles.Render("~/Content/Employee")
     @Styles.Render("~/Content/css")
-
     <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/21.1.5/css/dx.common.css" />
     <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/21.1.5/css/dx.light.css" />
-    <script src="https://cdn3.devexpress.com/jslib/21.1.5/js/dx.all.js"></script>
+    <script src="https://cdn3.devexpress.com/jslib/21.1.5/js/dx.all.js"></script>   
 }
-
-
 <div ng-app="EmployeeApp">
     <div ng-controller="ListCtrl">
         <h1 class="txthead">Employee List</h1>
         <div>
-            <div id="gridContainer"></div>
+            <div id="gridContainer">
+            </div>
         </div>
+        <md-button type="button" class="textAR md-raised md-primary"> <a href="~/Employee/">Add </a></md-button>
     </div>
-
-
 </div>
-
 @section scripts{
     @Scripts.Render("~/bundles/Angular")
     @Scripts.Render("~/bundles/Common")
