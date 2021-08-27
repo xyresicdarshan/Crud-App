@@ -57,7 +57,7 @@ var EmployeeAppExtension;
                                     type: "default",
                                     text: "View",
                                     onClick: function (e) {
-                                        _this.ViewEmployee(options.data.EmployeeId);
+                                        _this.ShowInput(options.data.EmployeeId, "View");
                                     }
                                 }).appendTo(container);
                                 //-
@@ -67,7 +67,7 @@ var EmployeeAppExtension;
                                     type: "success",
                                     text: "Update",
                                     onClick: function (e) {
-                                        _this.UpdateEmployee(options.data.EmployeeId);
+                                        _this.ShowInput(options.data.EmployeeId, "Update");
                                     }
                                 }).appendTo(container);
                                 //-
@@ -89,19 +89,21 @@ var EmployeeAppExtension;
                     showBorders: true
                 });
             };
-            _this.ViewEmployee = function (id) {
-                _this.ShowInput(id);
+            _this.ViewEmployee = function (id, flag) {
+                _this.ShowInput(id, flag);
                 console.log(id);
-                _this.dataSvc.GetEmployee(id).then(function (data) {
-                    console.log(data);
-                    _this.$scope.project = data;
-                }).catch(function (error) {
-                    console.log(error);
-                }).finally(function () {
-                });
+                //this.isDisabled = true;
+                // this.dataSvc.GetEmployee(id, flag).then((data) => {
+                //console.log(data);
+                //this.$scope.project = data;
+                //this.isDisabled = true;
+                //}).catch((error) => {
+                //console.log(error);
+                //}).finally(() => {
+                //})
             };
-            _this.UpdateEmployee = function (id) {
-                _this.ShowInput(id);
+            _this.UpdateEmployee = function (id, flag1) {
+                _this.ShowInput(id, flag1);
                 _this.dataSvc.UpdateEmployee(id).then(function (data) {
                     console.log(data);
                 }).catch(function (error) {
@@ -129,8 +131,8 @@ var EmployeeAppExtension;
                 }, function () {
                 });
             };
-            _this.ShowInput = function (id) {
-                window.location.href = "/Employee/ViewEmployee/" + id;
+            _this.ShowInput = function (id, flag) {
+                window.location.href = "/Employee/ViewEmployee/" + id + "?screenview=" + flag;
             };
             _this.$scope = $scope;
             _this.$mdDialog = $mdDialog;

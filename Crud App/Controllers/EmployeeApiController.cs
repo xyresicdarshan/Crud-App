@@ -30,7 +30,7 @@ namespace Crud_App.Controllers
 
         public JsonResult UpdateEmployee(EmployeeViewModel model)
         {
-
+            
             var result = service.UpdateEmployee(model);
             return Json(result, JsonRequestBehavior.AllowGet);
         }

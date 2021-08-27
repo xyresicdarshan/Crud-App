@@ -34,16 +34,18 @@ var EmployeeAppExtension;
             };
             _this.UpdateEmployee = function () {
                 _this.dataSvc.UpdateEmployee(_this.$scope.project).then(function (data) {
-                    _this.showMessage("Updated Sucesfully");
                     console.log(data);
+                    _this.showMessage("Updated Sucesfully");
                 }).catch(function (error) {
                     console.log(error);
+                    _this.showMessage("Updated Error");
                 }).finally(function () {
                 });
             };
             _this.$scope = $scope;
             _this.EmployeeId = $("#hdnid").val();
             _this.ViewEmployee(_this.EmployeeId);
+            _this.flag = $("#hdnflg").val();
             return _this;
         }
         ViewCtrl.prototype.$onInit = function () {

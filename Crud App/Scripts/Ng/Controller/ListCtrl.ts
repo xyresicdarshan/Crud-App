@@ -14,6 +14,7 @@ module EmployeeAppExtension {
         EmployeeEmail: string;
         Tos: boolean;
         Wfh: boolean;
+        isDisabled: boolean;
 
         project: IEmployeeModel;
     }
@@ -28,11 +29,13 @@ module EmployeeAppExtension {
         EmployeeEmail: string;
         Tos: boolean;
         Wfh: boolean;
+        isDisabled: boolean;
 
 
         $scope: EmployeeAppExtension.IPathwayScope;
         private $mdDialog: any;
         private $mdSelect: any;
+       
         constructor($scope: EmployeeAppExtension.IPathwayScope, private dataSvc: EmployeeDataService, $timeout, $mdDialog: any, $mdSelect: any, $mdToast: any, $filter: any) {
             super($scope, $mdToast);
             this.$scope = $scope;
@@ -85,8 +88,8 @@ module EmployeeAppExtension {
                                 type: "default",
                                 text: "View",
                                 onClick: (e) => {
-                                    this.ViewEmployee(options.data.EmployeeId);
-                                   
+                                    this.ShowInput(options.data.EmployeeId, "View");
+                                    
                                 }
                             }).appendTo(container);
                             //-
@@ -96,7 +99,7 @@ module EmployeeAppExtension {
                                 type: "success",
                                 text: "Update",
                                 onClick: (e) => {
-                                    this.UpdateEmployee(options.data.EmployeeId);
+                                    this.ShowInput(options.data.EmployeeId, "Update");
                                    
                                 }
                             }).appendTo(container);
@@ -121,21 +124,24 @@ module EmployeeAppExtension {
             });
       
         }
-        ViewEmployee = (id: number) => {
-            this.ShowInput(id);
+        ViewEmployee = (id, flag) => {
+            this.ShowInput(id,flag);
             console.log(id);
-            this.dataSvc.GetEmployee(id).then((data) => {
-                console.log(data);
-                this.$scope.project = data;
-            }).catch((error) => {
-                console.log(error);
-            }).finally(() => {
+            //this.isDisabled = true;
+           // this.dataSvc.GetEmployee(id, flag).then((data) => {
+                //console.log(data);
+                //this.$scope.project = data;
+                //this.isDisabled = true;
 
-            })
+            //}).catch((error) => {
+                //console.log(error);
+            //}).finally(() => {
+
+            //})
         }
 
-        UpdateEmployee = (id) => {
-            this.ShowInput(id);
+        UpdateEmployee = (id,flag1) => {
+            this.ShowInput(id,flag1);
             this.dataSvc.UpdateEmployee(id).then((data) => {
                 console.log(data);
             }).catch((error) => {
@@ -171,8 +177,8 @@ module EmployeeAppExtension {
         }
           
 
-        ShowInput = (id: number) => {
-            window.location.href = "/Employee/ViewEmployee/" + id;
+        ShowInput = (id: number, flag: string) => {
+            window.location.href = "/Employee/ViewEmployee/" +id+"?screenview="+flag;
         }
     }
 

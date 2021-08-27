@@ -13,6 +13,7 @@ module EmployeeAppExtension {
         EmployeeEmail: string;
         Tos: boolean;
         Wfh: boolean;
+        isDisabled: boolean;
 
         project: IEmployeeModel;
     }
@@ -27,11 +28,14 @@ module EmployeeAppExtension {
         EmployeeEmail: string;
         Tos: boolean;
         Wfh: boolean;
+        isDisabled: boolean;
 
 
 
         $scope: EmployeeAppExtension.IPathwayScope;
         private $mdDialog: any;
+        flag: boolean;
+        flag1: boolean;
         constructor($scope: EmployeeAppExtension.IPathwayScope, private dataSvc: EmployeeDataService, $timeout, $mdDialog: any, $mdSelect: any, $mdToast: any) {
 
             super($scope, $mdToast);
@@ -39,6 +43,7 @@ module EmployeeAppExtension {
 
             this.EmployeeId = $("#hdnid").val();
             this.ViewEmployee(this.EmployeeId);
+            this.flag = $("#hdnflg").val();
             
 
         }
@@ -63,10 +68,11 @@ module EmployeeAppExtension {
 
         UpdateEmployee = () => {
             this.dataSvc.UpdateEmployee(this.$scope.project).then((data) => {
-                this.showMessage("Updated Sucesfully");
                 console.log(data);
+                    this.showMessage("Updated Sucesfully")
             }).catch((error) => {
                 console.log(error);
+                this.showMessage("Updated Error")
             }).finally(() => {
 
             })
