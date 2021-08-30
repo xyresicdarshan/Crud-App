@@ -29,14 +29,12 @@ module EmployeeAppExtension {
         Tos: boolean;
         Wfh: boolean;
         isDisabled: boolean;
-      //  all: string;
 
 
 
         $scope: EmployeeAppExtension.IPathwayScope;
         private $mdDialog: any;
         flag: boolean;
-        flag1: boolean;
         constructor($scope: EmployeeAppExtension.IPathwayScope, private dataSvc: EmployeeDataService, $timeout, $mdDialog: any, $mdSelect: any, $mdToast: any) {
 
             super($scope, $mdToast);
@@ -45,8 +43,6 @@ module EmployeeAppExtension {
             this.EmployeeId = $("#hdnid").val();
             this.ViewEmployee(this.EmployeeId);
             this.flag = $("#flag").val()=="View"? true:false;
-            //this.flag = $("#flag").val();
-
         }
 
         $onInit() {

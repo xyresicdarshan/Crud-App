@@ -35,7 +35,7 @@ namespace Crud_App.service
             return db.SaveChanges();
         }
 
-        public List<EmployeeViewModel> GetEmployeeList()
+        public List<EmployeeViewModel> Filter()
         {
             var inputs = db.Employees.OrderByDescending(s => s.EmployeeId).ToList();
             List<EmployeeViewModel> ev = new List<EmployeeViewModel>();

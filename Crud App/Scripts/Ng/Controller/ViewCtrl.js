@@ -47,7 +47,6 @@ var EmployeeAppExtension;
             _this.ViewEmployee(_this.EmployeeId);
             _this.flag = $("#flag").val() == "View" ? true : false;
             return _this;
-            //this.flag = $("#flag").val();
         }
         ViewCtrl.prototype.$onInit = function () {
         };

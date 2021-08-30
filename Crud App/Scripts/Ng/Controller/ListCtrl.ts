@@ -65,12 +65,28 @@ module EmployeeAppExtension {
 
             })
         }
+
+        filterList: IEmployeeModel[];
+        Filter = () => {
+            this.dataSvc.Filter(this.$scope.project).then((data) => {
+                var Employee: String[] = new Array(10);
+                this.filterList = data;
+                console.log(data);
+                this.bindEmployeeGrid();
+            
+            }).catch((error) => {
+            console.log(error);
+            }).finally(() => {
+
+            })
+        }
+
         bindEmployeeGrid=()=> {
             $("#gridContainer").dxDataGrid({
                 dataSource: this.employeeList,
                 keyExpr: 'EmployeeId',
                 columns: [
-                    { caption: "Employee Name", dataField: "EmployeeName" },
+                    { caption: "Employee Name", dataField: "EmployeeName", onclick: (e) => { this.Filter(Options.data.EmployeeName } },
                     { caption: "Employee Email", dataField: "EmployeeEmail" },
                     { caption: "Designation", dataField: "Designation" },
                     { caption: "Department", dataField: "Department" },
@@ -127,30 +143,11 @@ module EmployeeAppExtension {
         ViewEmployee = (id, flag) => {
             this.ShowInput(id,flag);
             console.log(id);
-            //this.isDisabled = true;
-           // this.dataSvc.GetEmployee(id, flag).then((data) => {
-                //console.log(data);
-                //this.$scope.project = data;
-                //this.isDisabled = true;
-
-            //}).catch((error) => {
-                //console.log(error);
-            //}).finally(() => {
-
-            //})
         }
 
         UpdateEmployee = (id, flag) => {
-            
             this.ShowInput(id, flag);
             console.log(id);
-            //this.dataSvc.UpdateEmployee(id).then((data) => {
-               // console.log(data);
-            //}).catch((error) => {
-            //    console.log(error);
-            //}).finally(() => {
-
-            //})
         }
 
         DeleteEmployee = (id) => {
@@ -177,7 +174,6 @@ module EmployeeAppExtension {
             }, () => {
             });
         }
-          
 
         ShowInput = (id: number, flag: string) => {
             window.location.href = "/Employee/ViewEmployee/" +id+"?screenview="+flag;

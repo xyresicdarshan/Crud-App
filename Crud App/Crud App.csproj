@@ -156,6 +156,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\EmployeeService.cs" />
+    <Compile Include="Service\LinqService.cs" />
     <Compile Include="ViewModel\EmployeeViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1053,6 +1054,7 @@
     <TypeScriptCompile Include="Scripts\Ng\Controller\ViewCtrl.ts" />
     <TypeScriptCompile Include="Scripts\Ng\Model\EmployeeModel.ts" />
     <TypeScriptCompile Include="Scripts\Ng\Service\EmployeeDataService.ts" />
+    <TypeScriptCompile Include="Scripts\Ng\Service\LinqDataService.ts" />
     <TypeScriptCompile Include="Scripts\Ng\Site.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-animate.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-component-router.d.ts" />

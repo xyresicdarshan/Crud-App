@@ -92,25 +92,10 @@ var EmployeeAppExtension;
             _this.ViewEmployee = function (id, flag) {
                 _this.ShowInput(id, flag);
                 console.log(id);
-                //this.isDisabled = true;
-                // this.dataSvc.GetEmployee(id, flag).then((data) => {
-                //console.log(data);
-                //this.$scope.project = data;
-                //this.isDisabled = true;
-                //}).catch((error) => {
-                //console.log(error);
-                //}).finally(() => {
-                //})
             };
             _this.UpdateEmployee = function (id, flag) {
                 _this.ShowInput(id, flag);
                 console.log(id);
-                //this.dataSvc.UpdateEmployee(id).then((data) => {
-                // console.log(data);
-                //}).catch((error) => {
-                //    console.log(error);
-                //}).finally(() => {
-                //})
             };
             _this.DeleteEmployee = function (id) {
                 var confirm = _this.$mdDialog.confirm()
