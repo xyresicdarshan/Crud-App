@@ -45,8 +45,9 @@ var EmployeeAppExtension;
             _this.$scope = $scope;
             _this.EmployeeId = $("#hdnid").val();
             _this.ViewEmployee(_this.EmployeeId);
-            _this.flag = $("#hdnflg").val();
+            _this.flag = $("#flag").val() == "View" ? true : false;
             return _this;
+            //this.flag = $("#flag").val();
         }
         ViewCtrl.prototype.$onInit = function () {
         };

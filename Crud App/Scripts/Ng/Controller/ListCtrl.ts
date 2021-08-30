@@ -88,7 +88,7 @@ module EmployeeAppExtension {
                                 type: "default",
                                 text: "View",
                                 onClick: (e) => {
-                                    this.ShowInput(options.data.EmployeeId, "View");
+                                    this.ShowInput(options.data.EmployeeId, 'View');
                                     
                                 }
                             }).appendTo(container);
@@ -99,8 +99,8 @@ module EmployeeAppExtension {
                                 type: "success",
                                 text: "Update",
                                 onClick: (e) => {
-                                    this.ShowInput(options.data.EmployeeId, "Update");
-                                   
+                                    this.ShowInput(options.data.EmployeeId, 'Update');
+                                  
                                 }
                             }).appendTo(container);
                             //-
@@ -140,15 +140,17 @@ module EmployeeAppExtension {
             //})
         }
 
-        UpdateEmployee = (id,flag1) => {
-            this.ShowInput(id,flag1);
-            this.dataSvc.UpdateEmployee(id).then((data) => {
-                console.log(data);
-            }).catch((error) => {
-                console.log(error);
-            }).finally(() => {
+        UpdateEmployee = (id, flag) => {
+            
+            this.ShowInput(id, flag);
+            console.log(id);
+            //this.dataSvc.UpdateEmployee(id).then((data) => {
+               // console.log(data);
+            //}).catch((error) => {
+            //    console.log(error);
+            //}).finally(() => {
 
-            })
+            //})
         }
 
         DeleteEmployee = (id) => {

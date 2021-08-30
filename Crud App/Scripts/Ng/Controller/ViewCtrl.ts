@@ -29,6 +29,7 @@ module EmployeeAppExtension {
         Tos: boolean;
         Wfh: boolean;
         isDisabled: boolean;
+      //  all: string;
 
 
 
@@ -43,8 +44,8 @@ module EmployeeAppExtension {
 
             this.EmployeeId = $("#hdnid").val();
             this.ViewEmployee(this.EmployeeId);
-            this.flag = $("#hdnflg").val();
-            
+            this.flag = $("#flag").val()=="View"? true:false;
+            //this.flag = $("#flag").val();
 
         }
 

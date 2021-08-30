@@ -57,7 +57,7 @@ var EmployeeAppExtension;
                                     type: "default",
                                     text: "View",
                                     onClick: function (e) {
-                                        _this.ShowInput(options.data.EmployeeId, "View");
+                                        _this.ShowInput(options.data.EmployeeId, 'View');
                                     }
                                 }).appendTo(container);
                                 //-
@@ -67,7 +67,7 @@ var EmployeeAppExtension;
                                     type: "success",
                                     text: "Update",
                                     onClick: function (e) {
-                                        _this.ShowInput(options.data.EmployeeId, "Update");
+                                        _this.ShowInput(options.data.EmployeeId, 'Update');
                                     }
                                 }).appendTo(container);
                                 //-
@@ -102,14 +102,15 @@ var EmployeeAppExtension;
                 //}).finally(() => {
                 //})
             };
-            _this.UpdateEmployee = function (id, flag1) {
-                _this.ShowInput(id, flag1);
-                _this.dataSvc.UpdateEmployee(id).then(function (data) {
-                    console.log(data);
-                }).catch(function (error) {
-                    console.log(error);
-                }).finally(function () {
-                });
+            _this.UpdateEmployee = function (id, flag) {
+                _this.ShowInput(id, flag);
+                console.log(id);
+                //this.dataSvc.UpdateEmployee(id).then((data) => {
+                // console.log(data);
+                //}).catch((error) => {
+                //    console.log(error);
+                //}).finally(() => {
+                //})
             };
             _this.DeleteEmployee = function (id) {
                 var confirm = _this.$mdDialog.confirm()
