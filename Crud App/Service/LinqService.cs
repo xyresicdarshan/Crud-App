@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-
 namespace Crud_App.Service
 {
     public class LinqService
@@ -21,26 +20,67 @@ namespace Crud_App.Service
             db = _db;
         }
 
-        public List<EmployeeViewModel> Filter()
+       public List<EmployeeViewModel> Filter()
         {
-            var Employees = db.Employees.OrderBy(s => s.EmployeeName).ToString();
+            var inputs = db.Employees.Where(s => s.Department == "Dot Net").ToList();
             List<EmployeeViewModel> ev = new List<EmployeeViewModel>();
-            foreach ( var Employee in Employees)
+            foreach (var input in inputs)
             {
-                EmployeeViewModel EmployeeView = new EmployeeViewModel()
+                    EmployeeViewModel EmployeeView = new EmployeeViewModel()
                 {
-                    EmployeeId = Employee.EmployeeId,
-                    EmployeeName = Employee.EmployeeName,
-                    EmployeeEmail = Employee.EmployeeEmail,
-                    Department = Employee.Department,
-                    Designation = Employee.Designation,
-                    Tos = Employee.Tos,
-                    Wfh = Employee.Wfh
+                    EmployeeId = input.EmployeeId,
+                    EmployeeName = input.EmployeeName,
+                    EmployeeEmail = input.EmployeeEmail,
+                    Department = input.Department,
+                    Designation = input.Designation,
+                    Tos = input.Tos,
+                    Wfh = input.Wfh
                 };
                 ev.Add(EmployeeView);
             }
             return ev;
         }
 
+        public List<EmployeeViewModel> Grouping()
+        {
+            var inputs = db.Employees.GroupBy(s => s.Department).ToList();
+            List<EmployeeViewModel> ev = new List<EmployeeViewModel>();
+            foreach (var input in inputs)
+            {
+                EmployeeViewModel EmployeeView = new EmployeeViewModel()
+                {
+                    EmployeeId = input.EmployeeId,
+                    EmployeeName = input.EmployeeName,
+                    EmployeeEmail = input.EmployeeEmail,
+                    Department = input.Department,
+                    Designation = input.Designation,
+                    Tos = input.Tos,
+                    Wfh = input.Wfh
+                };
+                ev.Add(EmployeeView);
+            }
+            return ev;
+        }
+    
+        public List<EmployeeViewModel> Ordering()
+        {
+            var inputs = db.Employees.OrderBy(s => s.EmployeeName).ToList();
+            List<EmployeeViewModel> ev = new List<EmployeeViewModel>();
+            foreach (var input in inputs)
+            {
+                EmployeeViewModel EmployeeView = new EmployeeViewModel()
+                {
+                    EmployeeId = input.EmployeeId,
+                    EmployeeName = input.EmployeeName,
+                    EmployeeEmail = input.EmployeeEmail,
+                    Department = input.Department,
+                    Designation = input.Designation,
+                    Tos = input.Tos,
+                    Wfh = input.Wfh
+                };
+                ev.Add(EmployeeView);
+            }
+            return ev;
+        }
     }
 }

@@ -19,6 +19,7 @@ module EmployeeAppExtension {
         project: IEmployeeModel;
     }
 
+    //----------------- Controller : Start ------------------//
     export class ListCtrl extends wp.angularBase.BaseCtrl implements angular.IController {
 
 
@@ -41,6 +42,7 @@ module EmployeeAppExtension {
             this.$scope = $scope;
             this.$mdDialog = $mdDialog;
             this.GetEmployeeList();
+            //this.Filter();
 
            
             
@@ -51,7 +53,7 @@ module EmployeeAppExtension {
 
         private init(): void {
         }
-
+        //-----------------Function to Get List : Start------------------//
         employeeList: IEmployeeModel[];
         GetEmployeeList = () => {
             this.dataSvc.GetEmployeeList(this.$scope.project).then((data) => {
@@ -65,35 +67,75 @@ module EmployeeAppExtension {
 
             })
         }
+        //-----------------Function to Get List : End------------------//
 
-        filterList: IEmployeeModel[];
+        //-----------------Function For LINQ Filter : Start------------------//
+        filterlist: IEmployeeModel[];
         Filter = () => {
             this.dataSvc.Filter(this.$scope.project).then((data) => {
-                var Employee: String[] = new Array(10);
-                this.filterList = data;
+                var Employee: String[] = new Array(100);
+                this.filterlist = data;
+                this.employeeList = data;
                 console.log(data);
                 this.bindEmployeeGrid();
-            
             }).catch((error) => {
-            console.log(error);
+                console.log(error);
             }).finally(() => {
 
             })
         }
+        //-----------------Function For LINQ Filter : End------------------//
 
+        //-----------------Function For LINQ Order : Start------------------//
+        orderlist: IEmployeeModel[];
+        Ordering = () => {
+            this.dataSvc.Ordering(this.$scope.project).then((data) => {
+                var Employee: String[] = new Array(100);
+                this.orderlist = data;
+                this.employeeList = data;
+                console.log(data);
+                this.bindEmployeeGrid();
+            }).catch((error) => {
+                console.log(error);
+            }).finally(() => {
+
+            })
+        }
+        //-----------------Function For LINQ Order : End------------------//
+
+        //-----------------Function For LINQ Group : Start------------------//
+        grouplist: IEmployeeModel[];
+        Grouping = () => {
+            this.dataSvc.Grouping(this.$scope.project).then((data) => {
+                var Employee: String[] = new Array(100);
+                this.grouplist = data;
+                this.employeeList = data;
+                console.log(data);
+                this.bindEmployeeGrid();
+            }).catch((error) => {
+                console.log(error);
+            }).finally(() => {
+
+            })
+        }
+        //-----------------Function For LINQ Group : End------------------//
+
+
+        //-----------------DevExtme Datagrid : Start------------------//
         bindEmployeeGrid=()=> {
             $("#gridContainer").dxDataGrid({
                 dataSource: this.employeeList,
                 keyExpr: 'EmployeeId',
+
                 columns: [
-                    { caption: "Employee Name", dataField: "EmployeeName", onclick: (e) => { this.Filter(Options.data.EmployeeName } },
-                    { caption: "Employee Email", dataField: "EmployeeEmail" },
-                    { caption: "Designation", dataField: "Designation" },
-                    { caption: "Department", dataField: "Department" },
-                    { caption: "T & S", dataField: "Tos" },
-                    { caption: "Work From Home", dataField: "Wfh" },
+                    {caption: "Employee Name", dataField: "EmployeeName", allowSorting: false },
+                    { caption: "Employee Email", dataField: "EmployeeEmail",  allowSorting: false},
+                    { caption: "Designation", dataField: "Designation", allowSorting: false, width: 150 },
+                    { caption: "Department", dataField: "Department", allowSorting: false, width: 100, onclick: (e) => { this.Filter() }},
+                    { caption: "T & S", dataField: "Tos", allowSorting: false, width: 50},
+                    { caption: "W F H", dataField: "Wfh", allowSorting: false, width: 80},
                     {
-                        caption: "",
+                        caption: "Action",
                         minWidth: 325,
                         cellTemplate:  (container, options)=> {
                             container.addClass("chart-cell");
@@ -129,27 +171,58 @@ module EmployeeAppExtension {
                                     this.DeleteEmployee(options.data.EmployeeId);
                                 }
                             }).appendTo(container);
+
+                            $("<div/>").dxButton({
+                                icon: "",
+                                type: "",
+                                text: "Test",
+                                onClick: (e) => {
+                                    this.Grouping();
+                                }
+                            }).appendTo(container);
                         }
-                    }
+                    },
+                    $("#filter").dxButton({
+                        text: 'Filter',
+                        onClick: (e) => {
+                            this.Filter();
+                        }
+                    }),
+
+                    $("#order").dxButton({
+                        text: 'OrderBy',
+                        onClick: (e) => {
+                            this.Ordering();
+                        }
+                    })
                 ],
                 paging: {
                     pageSize:10
                 },
-                
-                showBorders: true
+
+                showBorders: true,
+                allowColumnReordering: true,
+                allowColumnResizing : true,
+                columnAutoWidth: true,
             });
-      
         }
+        //-----------------DevExtme Datagrid : End------------------//
+
+        //-----------------Function to Redirect View in UI : Start------------------//
         ViewEmployee = (id, flag) => {
             this.ShowInput(id,flag);
             console.log(id);
         }
+        //-----------------Function to Redirect View in UI : Start------------------//
 
+        //-----------------Function to Redirect Update in UI : Start------------------//
         UpdateEmployee = (id, flag) => {
             this.ShowInput(id, flag);
             console.log(id);
         }
+        //-----------------Function to Redirect Update in UI : End------------------//
 
+        //-----------------Function to Delete Employee : Start------------------//
         DeleteEmployee = (id) => {
 
             var confirm = this.$mdDialog.confirm()
@@ -174,11 +247,15 @@ module EmployeeAppExtension {
             }, () => {
             });
         }
-
+        //-----------------Function to Delete Employee : End------------------//
+        
+        //-----------------Function for Rediract : Start------------------//
         ShowInput = (id: number, flag: string) => {
             window.location.href = "/Employee/ViewEmployee/" +id+"?screenview="+flag;
         }
+        //-----------------Function for Rediract : Start------------------//
     }
+    //----------------- Controller : End ------------------//
 
     ListCtrl.$inject = ['$scope', 'EmployeeDataService', '$timeout', '$mdDialog', '$mdSelect', '$mdToast'];
 

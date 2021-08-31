@@ -18,7 +18,7 @@ namespace Crud_App.Controllers
         }
          public JsonResult GetEmployeeList()
         {
-            var result = service.Filter();
+            var result = service.GetEmployeeList();
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
@@ -41,10 +41,5 @@ namespace Crud_App.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult Filter()
-        {
-            var result = service.Filter();
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
     }
 }

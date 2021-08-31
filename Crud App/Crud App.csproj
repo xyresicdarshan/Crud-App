@@ -133,6 +133,7 @@
     <Compile Include="Controllers\EmployeeApiController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LinqApiController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1035,6 +1036,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\LinqApi\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -1054,7 +1056,6 @@
     <TypeScriptCompile Include="Scripts\Ng\Controller\ViewCtrl.ts" />
     <TypeScriptCompile Include="Scripts\Ng\Model\EmployeeModel.ts" />
     <TypeScriptCompile Include="Scripts\Ng\Service\EmployeeDataService.ts" />
-    <TypeScriptCompile Include="Scripts\Ng\Service\LinqDataService.ts" />
     <TypeScriptCompile Include="Scripts\Ng\Site.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-animate.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-component-router.d.ts" />

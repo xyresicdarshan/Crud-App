@@ -18,6 +18,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var EmployeeAppExtension;
 (function (EmployeeAppExtension) {
+    //----------------- Controller : Start ------------------//
     var ListCtrl = /** @class */ (function (_super) {
         __extends(ListCtrl, _super);
         function ListCtrl($scope, dataSvc, $timeout, $mdDialog, $mdSelect, $mdToast, $filter) {
@@ -34,19 +35,57 @@ var EmployeeAppExtension;
                 }).finally(function () {
                 });
             };
+            _this.Filter = function () {
+                _this.dataSvc.Filter(_this.$scope.project).then(function (data) {
+                    var Employee = new Array(100);
+                    _this.filterlist = data;
+                    _this.employeeList = data;
+                    console.log(data);
+                    _this.bindEmployeeGrid();
+                }).catch(function (error) {
+                    console.log(error);
+                }).finally(function () {
+                });
+            };
+            _this.Ordering = function () {
+                _this.dataSvc.Ordering(_this.$scope.project).then(function (data) {
+                    var Employee = new Array(100);
+                    _this.orderlist = data;
+                    _this.employeeList = data;
+                    console.log(data);
+                    _this.bindEmployeeGrid();
+                }).catch(function (error) {
+                    console.log(error);
+                }).finally(function () {
+                });
+            };
+            _this.Grouping = function () {
+                _this.dataSvc.Grouping(_this.$scope.project).then(function (data) {
+                    var Employee = new Array(100);
+                    _this.grouplist = data;
+                    _this.employeeList = data;
+                    console.log(data);
+                    _this.bindEmployeeGrid();
+                }).catch(function (error) {
+                    console.log(error);
+                }).finally(function () {
+                });
+            };
+            //-----------------Function For LINQ Group : End------------------//
+            //-----------------DevExtme Datagrid : Start------------------//
             _this.bindEmployeeGrid = function () {
                 $("#gridContainer").dxDataGrid({
                     dataSource: _this.employeeList,
                     keyExpr: 'EmployeeId',
                     columns: [
-                        { caption: "Employee Name", dataField: "EmployeeName" },
-                        { caption: "Employee Email", dataField: "EmployeeEmail" },
-                        { caption: "Designation", dataField: "Designation" },
-                        { caption: "Department", dataField: "Department" },
-                        { caption: "T & S", dataField: "Tos" },
-                        { caption: "Work From Home", dataField: "Wfh" },
+                        { caption: "Employee Name", dataField: "EmployeeName", allowSorting: false },
+                        { caption: "Employee Email", dataField: "EmployeeEmail", allowSorting: false },
+                        { caption: "Designation", dataField: "Designation", allowSorting: false, width: 150 },
+                        { caption: "Department", dataField: "Department", allowSorting: false, width: 100, onclick: function (e) { _this.Filter(); } },
+                        { caption: "T & S", dataField: "Tos", allowSorting: false, width: 50 },
+                        { caption: "W F H", dataField: "Wfh", allowSorting: false, width: 80 },
                         {
-                            caption: "",
+                            caption: "Action",
                             minWidth: 325,
                             cellTemplate: function (container, options) {
                                 container.addClass("chart-cell");
@@ -80,23 +119,52 @@ var EmployeeAppExtension;
                                         _this.DeleteEmployee(options.data.EmployeeId);
                                     }
                                 }).appendTo(container);
+                                $("<div/>").dxButton({
+                                    icon: "",
+                                    type: "",
+                                    text: "Test",
+                                    onClick: function (e) {
+                                        _this.Grouping();
+                                    }
+                                }).appendTo(container);
                             }
-                        }
+                        },
+                        $("#filter").dxButton({
+                            text: 'Filter',
+                            onClick: function (e) {
+                                _this.Filter();
+                            }
+                        }),
+                        $("#order").dxButton({
+                            text: 'OrderBy',
+                            onClick: function (e) {
+                                _this.Ordering();
+                            }
+                        })
                     ],
                     paging: {
                         pageSize: 10
                     },
-                    showBorders: true
+                    showBorders: true,
+                    allowColumnReordering: true,
+                    allowColumnResizing: true,
+                    columnAutoWidth: true,
                 });
             };
+            //-----------------DevExtme Datagrid : End------------------//
+            //-----------------Function to Redirect View in UI : Start------------------//
             _this.ViewEmployee = function (id, flag) {
                 _this.ShowInput(id, flag);
                 console.log(id);
             };
+            //-----------------Function to Redirect View in UI : Start------------------//
+            //-----------------Function to Redirect Update in UI : Start------------------//
             _this.UpdateEmployee = function (id, flag) {
                 _this.ShowInput(id, flag);
                 console.log(id);
             };
+            //-----------------Function to Redirect Update in UI : End------------------//
+            //-----------------Function to Delete Employee : Start------------------//
             _this.DeleteEmployee = function (id) {
                 var confirm = _this.$mdDialog.confirm()
                     .title('Would you like to delete')
@@ -117,6 +185,8 @@ var EmployeeAppExtension;
                 }, function () {
                 });
             };
+            //-----------------Function to Delete Employee : End------------------//
+            //-----------------Function for Rediract : Start------------------//
             _this.ShowInput = function (id, flag) {
                 window.location.href = "/Employee/ViewEmployee/" + id + "?screenview=" + flag;
             };
@@ -124,6 +194,7 @@ var EmployeeAppExtension;
             _this.$mdDialog = $mdDialog;
             _this.GetEmployeeList();
             return _this;
+            //this.Filter();
         }
         ListCtrl.prototype.$onInit = function () {
         };
@@ -132,6 +203,7 @@ var EmployeeAppExtension;
         return ListCtrl;
     }(wp.angularBase.BaseCtrl));
     EmployeeAppExtension.ListCtrl = ListCtrl;
+    //----------------- Controller : End ------------------//
     ListCtrl.$inject = ['$scope', 'EmployeeDataService', '$timeout', '$mdDialog', '$mdSelect', '$mdToast'];
     var app = angular.module("EmployeeApp", ['ngMaterial', 'ngMessages', 'ngSanitize']);
     app.factory('EmployeeDataService', ['$http', '$q', EmployeeAppExtension.EmployeeDataService.EmployeeDataServiceFactory]);
