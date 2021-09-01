@@ -6,14 +6,16 @@
     @Styles.Render("~/Content/css")
     <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/21.1.5/css/dx.common.css" />
     <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/21.1.5/css/dx.light.css" />
-    <script src="https://cdn3.devexpress.com/jslib/21.1.5/js/dx.all.js"></script>   
+    <script src="https://cdn3.devexpress.com/jslib/21.1.5/js/dx.all.js"></script>
 }
 <div ng-app="EmployeeApp">
     <div ng-controller="ListCtrl">
         <h1 class="txthead">Employee List</h1>
         <div>
-            <div id="filter" style="align: right"></div>
-            <div id="order" style="align: right"></div>
+            <div id="filter"></div>
+            <div id="order" ></div>
+            <div id="group" ></div>
+            <div id="join" ></div>
             <div id="gridContainer">
             </div>
         </div>

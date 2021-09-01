@@ -5,6 +5,14 @@ using System.Web;
 
 namespace Crud_App.ViewModel
 {
+    public class DepartmentViewModel
+    {
+        public int DepartmentId { get; set; }
+        public string DepartmentLead { get; set; }
+        public string DepartmentName { get; set; }
+        public String DeptLeadEmail { get; set; }
+        public List<EmployeeViewModel> Employees { get; set; }
+    }
     public class EmployeeViewModel
     {
         public int EmployeeId { get; set; }

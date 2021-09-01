@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "Joining";
+}
+@section HeadContent{
+    @Styles.Render("~/Content/Employee")
+    @Styles.Render("~/Content/css")
+}
+
+<div ng-app="EmployeeApp">
+    <div ng-controller="JoiningCtrl as jc">
+        <h2>Joining</h2>
+        <div>
+            <h1 class="txthead">LINQ Join</h1>
+
+
+            <table>
+                <tr style="text-align:center">
+                    <th>Employee Id</th>
+                    <th>Employee Name</th>
+                    <th>EmpLoyee Email</th>
+                    <th>Designation</th>
+                    <th>Department Name</th>
+                    <th>Department Lead</th>
+                    <th>Lead Email </th>
+
+                </tr>
+                <tr ng-repeat="data in jc.employeeList">
+                    <td>{{data.EmployeeId}}</td>
+                    <td>{{data.EmployeeName}}</td>
+                    <td>{{data.EmployeeEmail}}</td>
+                    <td>{{data.Designation}}</td>
+                    <tr ng-repeat="data in jc.joinlist"></tr>
+                    <td>{{data. DepartmentName}}</td>
+                    <td>{{data.DepartmentLead}}</td>
+                    <td>{{data.DeptLeadEmail}}</td>
+                    <td><md-button class="textAR md-raised md-primary" ng-click="vm.ViewInput(data.ClientId)"> View </md-button></td>
+                    <td><md-button class="textAR md-raised" ng-click="vm.UpdateInput(data.ClientId)"> Update</md-button></td>
+                    <td><md-button type="submit" class="textAR md-raised md-warn" ng-click="vm.DeleteInput(data.ClientId)">Delete</md-button></td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+    @section scripts{
+        @Scripts.Render("~/bundles/Angular")
+        @Scripts.Render("~/bundles/Common")
+        @Scripts.Render("~/bundles/Joining")
+
+    }
+</div>
+
+

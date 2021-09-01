@@ -4,7 +4,16 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="OrganisationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="OrganisationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DeptId" />
+          </Key>
+          <Property Name="DeptId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DeptName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="DeptLead" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="LeadEmail" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
         <EntityType Name="Employee">
           <Key>
             <PropertyRef Name="EmployeeId" />
@@ -18,10 +27,10 @@
           <Property Name="Wfh" Type="bit" Nullable="false" />
         </EntityType>
         <EntityContainer Name="OrganisationModelStoreContainer">
+          <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="OrganisationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -39,7 +48,17 @@
         </EntityType>
         <EntityContainer Name="OrganisationEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="Departments" EntityType="OrganisationModel.Department" />
         </EntityContainer>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DeptId" />
+          </Key>
+          <Property Name="DeptId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeptName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DeptLead" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="LeadEmail" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -56,6 +75,16 @@
                 <ScalarProperty Name="EmployeeEmail" ColumnName="EmployeeEmail" />
                 <ScalarProperty Name="Tos" ColumnName="Tos" />
                 <ScalarProperty Name="Wfh" ColumnName="Wfh" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="OrganisationModel.Department">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="LeadEmail" ColumnName="LeadEmail" />
+                <ScalarProperty Name="DeptLead" ColumnName="DeptLead" />
+                <ScalarProperty Name="DeptName" ColumnName="DeptName" />
+                <ScalarProperty Name="DeptId" ColumnName="DeptId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

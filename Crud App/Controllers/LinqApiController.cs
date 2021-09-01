@@ -31,11 +31,11 @@ namespace Crud_App.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        //public JsonResult Joining()
-        //{
-            //var result = service.Joining();
-            //return Json(result, JsonRequestBehavior.AllowGet);
-       // }
+        public JsonResult Joining()
+        {
+            var result = service.Joining();
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
 
 
     }

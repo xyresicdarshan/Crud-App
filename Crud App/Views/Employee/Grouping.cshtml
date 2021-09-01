@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewBag.Title = "Grouping";
+}
+@section HeadContent{
+    @Styles.Render("~/Content/Employee")
+    @Styles.Render("~/Content/css")
+}
+<div ng-app="EmployeeApp">
+    <div ng-controller="GroupingCtrl as gc">
+        <div>
+            <h1 class="txthead">LINQ GroupBY</h1>
+            
+            
+            <table>
+                <tr ng-repeat="data in gc.grouplist">
+                    <br />
+                    <th>
+                        Department Name:  {{data.DepartmentName}}
+                        <br />
+                        <br />
+                        <table>
+                            <tr style="text-align:center">
+                                <th>Employee Id</th>
+                                <th>Employee Name</th>
+                                <th>EmpLoyee Email</th>
+                                <th>Designation</th>
+                                <th>T&S</th>
+                                <th>WFH</th>
+                            </tr>
+                            <tr ng-repeat="emp in data.Employees">
+                                <td>{{emp.EmployeeId}}</td>
+                                <td>{{emp.EmployeeName}}</td>
+                                <td>{{emp.EmployeeEmail}}</td>
+                                <td>{{emp.Designation}}</td>
+                                <td><md-checkbox ng-model="emp.Tos" ng-disabled="true"></md-checkbox></td>
+                                <td><md-checkbox ng-model="emp.Wfh" ng-disabled="true"></md-checkbox></td>
+                                <td><md-button class="textAR md-raised md-primary" ng-click="vm.ViewInput(data.ClientId)"> View </md-button></td>
+                                <td><md-button class="textAR md-raised" ng-click="vm.UpdateInput(data.ClientId)"> Update</md-button></td>
+                                <td><md-button type="submit" class="textAR md-raised md-warn" ng-click="vm.DeleteInput(data.ClientId)">Delete</md-button></td>
+                            </tr>
+                        </table>
+
+                    </th>
+
+                </tr>
+                
+                </tr>
+            </table>
+
+        </div>
+    </div>
+    @section scripts{
+        @Scripts.Render("~/bundles/Angular")
+        @Scripts.Render("~/bundles/Common")
+        @Scripts.Render("~/bundles/Grouping")
+
+    }
+</div>
+
+

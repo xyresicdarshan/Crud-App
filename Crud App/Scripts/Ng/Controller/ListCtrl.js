@@ -71,13 +71,26 @@ var EmployeeAppExtension;
                 }).finally(function () {
                 });
             };
-            //-----------------Function For LINQ Group : End------------------//
+            _this.Joining = function () {
+                _this.dataSvc.Joining(_this.$scope.project).then(function (data) {
+                    var Employee = new Array(100);
+                    _this.grouplist = data;
+                    _this.employeeList = data;
+                    console.log(data);
+                    _this.bindEmployeeGrid();
+                }).catch(function (error) {
+                    console.log(error);
+                }).finally(function () {
+                });
+            };
+            //-----------------Function For LINQ Join : End------------------//
             //-----------------DevExtme Datagrid : Start------------------//
             _this.bindEmployeeGrid = function () {
                 $("#gridContainer").dxDataGrid({
                     dataSource: _this.employeeList,
                     keyExpr: 'EmployeeId',
                     columns: [
+                        { caption: "Employee Id", dataField: "EmployeeId", allowSorting: false },
                         { caption: "Employee Name", dataField: "EmployeeName", allowSorting: false },
                         { caption: "Employee Email", dataField: "EmployeeEmail", allowSorting: false },
                         { caption: "Designation", dataField: "Designation", allowSorting: false, width: 150 },
@@ -119,37 +132,41 @@ var EmployeeAppExtension;
                                         _this.DeleteEmployee(options.data.EmployeeId);
                                     }
                                 }).appendTo(container);
-                                $("<div/>").dxButton({
-                                    icon: "",
-                                    type: "",
-                                    text: "Test",
-                                    onClick: function (e) {
-                                        _this.Grouping();
-                                    }
-                                }).appendTo(container);
                             }
                         },
-                        $("#filter").dxButton({
-                            text: 'Filter',
-                            onClick: function (e) {
-                                _this.Filter();
-                            }
-                        }),
-                        $("#order").dxButton({
-                            text: 'OrderBy',
-                            onClick: function (e) {
-                                _this.Ordering();
-                            }
-                        })
                     ],
                     paging: {
                         pageSize: 10
                     },
                     showBorders: true,
-                    allowColumnReordering: true,
-                    allowColumnResizing: true,
-                    columnAutoWidth: true,
+                    //allowColumnReordering: true,
+                    //allowColumnResizing : true,
+                    //columnAutoWidth: true,
                 });
+                $("#filter").dxButton({
+                    text: 'Test Filter',
+                    onClick: function (e) {
+                        _this.Filter();
+                    }
+                }),
+                    $("#order").dxButton({
+                        text: 'Test OrderBy',
+                        onClick: function (e) {
+                            _this.Ordering();
+                        }
+                    }),
+                    $("#group").dxButton({
+                        text: 'Test GroupBy',
+                        onClick: function (e) {
+                            _this.Grouping();
+                        }
+                    }),
+                    $("#join").dxButton({
+                        text: "Test Join By",
+                        onClick: function (e) {
+                            _this.Joining();
+                        }
+                    });
             };
             //-----------------DevExtme Datagrid : End------------------//
             //-----------------Function to Redirect View in UI : Start------------------//

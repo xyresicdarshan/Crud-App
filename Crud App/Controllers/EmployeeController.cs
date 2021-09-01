@@ -24,5 +24,13 @@ namespace Crud_App.Controllers
             
             return View();
         }
+        public ActionResult Grouping()
+        {
+            return View();
+        }
+        public ActionResult Joining()
+        {
+            return View();
+        }
     }
 }

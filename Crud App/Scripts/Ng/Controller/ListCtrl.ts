@@ -120,6 +120,24 @@ module EmployeeAppExtension {
         }
         //-----------------Function For LINQ Group : End------------------//
 
+        //-----------------Function For LINQ JOIN : Start------------------//
+        joinlist: IEmployeeModel[];
+        Joining = () => {
+            this.dataSvc.Joining(this.$scope.project).then((data) => {
+                var Employee: String[] = new Array(100);
+                this.grouplist = data;
+                this.employeeList = data;
+                console.log(data);
+                this.bindEmployeeGrid();
+            }).catch((error) => {
+                console.log(error);
+            }).finally(() => {
+
+            })
+        }
+        //-----------------Function For LINQ Join : End------------------//
+
+
 
         //-----------------DevExtme Datagrid : Start------------------//
         bindEmployeeGrid=()=> {
@@ -127,7 +145,9 @@ module EmployeeAppExtension {
                 dataSource: this.employeeList,
                 keyExpr: 'EmployeeId',
 
+
                 columns: [
+                    { caption: "Employee Id", dataField: "EmployeeId", allowSorting: false },
                     {caption: "Employee Name", dataField: "EmployeeName", allowSorting: false },
                     { caption: "Employee Email", dataField: "EmployeeEmail",  allowSorting: false},
                     { caption: "Designation", dataField: "Designation", allowSorting: false, width: 150 },
@@ -171,40 +191,47 @@ module EmployeeAppExtension {
                                     this.DeleteEmployee(options.data.EmployeeId);
                                 }
                             }).appendTo(container);
-
-                            $("<div/>").dxButton({
-                                icon: "",
-                                type: "",
-                                text: "Test",
-                                onClick: (e) => {
-                                    this.Grouping();
-                                }
-                            }).appendTo(container);
                         }
                     },
-                    $("#filter").dxButton({
-                        text: 'Filter',
-                        onClick: (e) => {
-                            this.Filter();
-                        }
-                    }),
-
-                    $("#order").dxButton({
-                        text: 'OrderBy',
-                        onClick: (e) => {
-                            this.Ordering();
-                        }
-                    })
+                   
                 ],
+                
                 paging: {
                     pageSize:10
                 },
 
                 showBorders: true,
-                allowColumnReordering: true,
-                allowColumnResizing : true,
-                columnAutoWidth: true,
+                //allowColumnReordering: true,
+                //allowColumnResizing : true,
+                //columnAutoWidth: true,
             });
+            $("#filter").dxButton({
+                text: 'Test Filter',
+                onClick: (e) => {
+                    this.Filter();
+                }
+            }),
+
+                $("#order").dxButton({
+                    text: 'Test OrderBy',
+                    onClick: (e) => {
+                        this.Ordering();
+                    }
+                }),
+
+                $("#group").dxButton({
+                    text: 'Test GroupBy',
+                    onClick: (e) => {
+                        this.Grouping();
+                    }
+                }),
+
+            $("#join").dxButton({
+                text: "Test Join By",
+                onClick: (e) => {
+                    this.Joining();
+                }
+            })
         }
         //-----------------DevExtme Datagrid : End------------------//
 
