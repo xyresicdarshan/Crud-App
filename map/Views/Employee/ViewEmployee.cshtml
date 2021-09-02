@@ -1,0 +1,96 @@
+﻿
+@{
+    ViewBag.Title = "ViewEmployee";
+}
+
+@section HeadContent{
+    @Styles.Render("~/Content/Employee")
+    @Styles.Render("~/Content/css")
+}
+
+
+<div ng-app="EmployeeApp" ng-controller="ViewCtrl as vc">
+    <h3 class="txthead">Action Page</h3>
+    <input type="hidden" id="hdnid" value="@ViewBag.Id" />
+    <input type="hidden" id="flag" value="@ViewBag.View"  />
+
+    <md-content layout-padding>
+        <form name="projectForm" class="textline">
+
+            <md-input-container class="md-block">
+                <label>Designation</label>
+                <input md-maxlength="30" required md-no-asterisk name="Designation" ng-model="project.Designation" ng-disabled="vc.flag">
+                <div ng-messages="projectForm.Designation.$error">
+                    <div ng-message="required">This is required.</div>
+                    <div ng-message="md-maxlength">The description must be less than 30 characters long.</div>
+                </div>
+            </md-input-container>
+
+            <div layout="row">
+                <md-input-container flex="50">
+                    <label>Employee Name</label>
+                    <input required name="EmployeeName" ng-model="project.EmployeeName" ng-disabled="vc.flag">
+                    <div ng-messages="projectForm.EmployeeName.$error">
+                        <div ng-message="required">This is required.</div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container flex="50">
+                    <label>Department</label>
+                    <md-select name="type" ng-model="project.Department" ng-disabled="vc.flag" required>
+                        <md-option value="Android">Android</md-option>
+                        <md-option value="Dot Net">Dot Net</md-option>
+                        <md-option value="Ios">IOS</md-option>
+                        <md-option value="QA">QA</md-option>
+                        <md-option value="HR">HR</md-option>
+                        <md-option value="Admin">Admin</md-option>
+                    </md-select>
+                    <div ng-messages="projectForm.Department.$error">
+                        <div ng-message="required">This is required.</div>
+                    </div>
+                </md-input-container>
+            </div>
+
+            <md-input-container class="md-block">
+                <label>Employee Email</label>
+                <input required type="email" name="EmployeeEmail" ng-model="project.EmployeeEmail"
+                       minlength="10" maxlength="100" ng-pattern="/^.+.+\..+$/" ng-disabled="vc.flag" />
+
+                <div ng-messages="projectForm.EmployeeEmail.$error" role="alert">
+                    <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                        Your email must be between 10 and 100 characters long and look like an e-mail address.
+                    </div>
+                </div>
+            </md-input-container>
+
+            <md-input-container class="md-block">
+                <md-checkbox name="Tos" ng-model="project.Tos" ng-disabled="vc.flag" required>
+                    I accept the terms of service.
+                </md-checkbox>
+                <div ng-messages="projectForm.Tos.$error" multiple md-auto-hide="false">
+                    <div ng-message="required">
+                        You must accept the terms of service before you can proceed.
+                    </div>
+                </div>
+            </md-input-container>
+
+            <md-input-container class="md-block">
+                <md-switch class="md-primary" name="Wfh" ng-model="project.Wfh" ng-disabled="vc.flag">
+                    Work From Home
+                </md-switch>
+            </md-input-container>
+            <div>
+                <md-button type="submit" class="textAR md-primary  md-raised " ng-click="vc.UpdateEmployee()" ng-hide="vc.flag">Update</md-button>
+                
+                <md-button type="button" class="textAR md-raised md-primary"> <a href="~/Employee/List">Show List </a></md-button>
+            </div>
+        </form>
+    </md-content>
+</div>
+    @section scripts{
+        @Scripts.Render("~/bundles/Angular")
+        @Scripts.Render("~/bundles/Common")
+        @Scripts.Render("~/bundles/View")
+    }
+</div>
+

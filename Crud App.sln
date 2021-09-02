@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.31605.320
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crud App", "Crud App\Crud App.csproj", "{019B38E5-4BB6-4B7F-AC3D-E48F26685013}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapperDemo", "MapperDemo\MapperDemo.csproj", "{2200BFAC-51F4-4F01-9127-8649C7862E6B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "map", "map\map.csproj", "{6DE71000-8A45-4DDD-890E-85A3FC663C4C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{019B38E5-4BB6-4B7F-AC3D-E48F26685013}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{019B38E5-4BB6-4B7F-AC3D-E48F26685013}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{019B38E5-4BB6-4B7F-AC3D-E48F26685013}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2200BFAC-51F4-4F01-9127-8649C7862E6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2200BFAC-51F4-4F01-9127-8649C7862E6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2200BFAC-51F4-4F01-9127-8649C7862E6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2200BFAC-51F4-4F01-9127-8649C7862E6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DE71000-8A45-4DDD-890E-85A3FC663C4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DE71000-8A45-4DDD-890E-85A3FC663C4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DE71000-8A45-4DDD-890E-85A3FC663C4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DE71000-8A45-4DDD-890E-85A3FC663C4C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

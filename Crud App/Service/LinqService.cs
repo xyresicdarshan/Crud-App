@@ -1,4 +1,5 @@
-﻿using Crud_App.Models;
+﻿using AutoMapper;
+using Crud_App.Models;
 using Crud_App.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -22,23 +23,23 @@ namespace Crud_App.Service
 
         public List<EmployeeViewModel> Filter()
         {
-            var inputs = db.Employees.Where(s => s.Department == "Dot Net").ToList();
-            List<EmployeeViewModel> ev = new List<EmployeeViewModel>();
-            foreach (var input in inputs)
-            {
-                EmployeeViewModel EmployeeView = new EmployeeViewModel()
-                {
-                    EmployeeId = input.EmployeeId,
-                    EmployeeName = input.EmployeeName,
-                    EmployeeEmail = input.EmployeeEmail,
-                    Department = input.Department,
-                    Designation = input.Designation,
-                    Tos = input.Tos,
-                    Wfh = input.Wfh
-                };
-                ev.Add(EmployeeView);
-            }
-            return ev;
+             var inputs = db.Employees.Where(s => s.Department == "Dot Net").ToList();
+             List<EmployeeViewModel> ev = new List<EmployeeViewModel>();
+             foreach (var input in inputs)
+             {
+                 EmployeeViewModel EmployeeView = new EmployeeViewModel()
+                 {
+                     EmployeeId = input.EmployeeId,
+                     EmployeeName = input.EmployeeName,
+                     EmployeeEmail = input.EmployeeEmail,
+                     Department = input.Department,
+                     Designation = input.Designation,
+                     Tos = input.Tos,
+                     Wfh = input.Wfh
+                 };
+                 ev.Add(EmployeeView);
+             }
+             return ev;
         }
 
         public List<DepartmentViewModel> Grouping()
