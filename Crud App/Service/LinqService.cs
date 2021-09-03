@@ -8,6 +8,7 @@ using System.Web;
 
 namespace Crud_App.Service
 {
+    //--------------- Service_Class :  Start ---------------//
     public class LinqService
     {
         OrganisationEntities db;
@@ -21,6 +22,7 @@ namespace Crud_App.Service
             db = _db;
         }
 
+        //--------------- LINQ Filter Service :  Start ---------------//
         public List<EmployeeViewModel> Filter()
         {
              var inputs = db.Employees.Where(s => s.Department == "Dot Net").ToList();
@@ -41,7 +43,10 @@ namespace Crud_App.Service
              }
              return ev;
         }
+        //--------------- LINQ Filter Service :  End ---------------//
 
+
+        //--------------- LINQ Grouping Service :  Start ---------------//
         public List<DepartmentViewModel> Grouping()
         {
             var inputs = db.Employees.GroupBy(s => s.Department).ToList();
@@ -73,7 +78,9 @@ namespace Crud_App.Service
             }
             return dv;
         }
+        //--------------- LINQ Grouping Service :  End ---------------//
 
+        //--------------- LINQ Ordering Service :  Start ---------------//
         public List<EmployeeViewModel> Ordering()
         {
             var inputs = db.Employees.OrderBy(s => s.EmployeeName).ToList();
@@ -94,7 +101,10 @@ namespace Crud_App.Service
             }
             return ev;
         }
+        //--------------- LINQ Ordering Service :  End ---------------//
 
+
+        //--------------- LINQ Joining Service :  Start ---------------//
         public List<DepartmentViewModel>Joining()
         {
             var inputs = db.Departments.GroupJoin(db.Employees,
@@ -137,5 +147,7 @@ namespace Crud_App.Service
             }
             return dv;
         }
+        //--------------- LINQ Joining Service :  Start ---------------//
     }
+    //--------------- Service_Class :  Start ---------------//
 }

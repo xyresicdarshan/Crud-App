@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Crud_App.ViewModel;
+using map.Models;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Owin;
 using Owin;
@@ -12,23 +14,30 @@ namespace map
         {
             ConfigureAuth(app);
         }
-        public void ConfigureServices(IServiceCollection services)
-        {
-            // .... Ignore code before this
 
-            // Auto Mapper Configurations
+        //public void ConfigureServices(IServiceCollection services)
+        //{
+        //    services.AddAutoMapper(typeof(Startup));
+        //    //services.AddControllersWithViews();
+        //}
 
-            var config = new MapperConfiguration(cfg =>
-            {
-                // cfg.AddProfile<AppProfile>();
-                //  cfg.CreateMap<Employee, EmployeeViewModel>();
-                // cfg.CreateMap<Department, DepartmentViewModel>();
-                //cfg.CreateMap<EmployeeViewModel, Employee>();
-            });
+        //public void ConfigureServices(IServiceCollection services)
+        //{
+        //    // .... Ignore code before this
 
-            IMapper mapper = config.CreateMapper();
+        //    // Auto Mapper Configurations
 
-            services.AddSingleton(mapper);
-        }
+        //    var config = new MapperConfiguration(cfg =>
+        //    {
+        //        // cfg.AddProfile<AppProfile>();
+        //        cfg.CreateMap<Employee, EmployeeViewModel>();
+        //        cfg.CreateMap<Department, DepartmentViewModel>();
+        //        cfg.CreateMap<EmployeeViewModel, Employee>();
+        //    });
+
+        //    IMapper mapper = config.CreateMapper();
+
+        //    services.AddSingleton(mapper);
+        //}
     }
 }

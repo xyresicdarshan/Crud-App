@@ -104,36 +104,16 @@ module EmployeeAppExtension {
         //-----------------Function For LINQ Order : End------------------//
 
         //-----------------Function For LINQ Group : Start------------------//
-        grouplist: IEmployeeModel[];
+        
         Grouping = () => {
-            this.dataSvc.Grouping(this.$scope.project).then((data) => {
-                var Employee: String[] = new Array(100);
-                this.grouplist = data;
-                this.employeeList = data;
-                console.log(data);
-                this.bindEmployeeGrid();
-            }).catch((error) => {
-                console.log(error);
-            }).finally(() => {
-
-            })
+            window.location.href = "/Employee/Grouping/";
         }
         //-----------------Function For LINQ Group : End------------------//
 
         //-----------------Function For LINQ JOIN : Start------------------//
         joinlist: IEmployeeModel[];
         Joining = () => {
-            this.dataSvc.Joining(this.$scope.project).then((data) => {
-                var Employee: String[] = new Array(100);
-                this.grouplist = data;
-                this.employeeList = data;
-                console.log(data);
-                this.bindEmployeeGrid();
-            }).catch((error) => {
-                console.log(error);
-            }).finally(() => {
-
-            })
+            window.location.href = "/Employee/Joining/";
         }
         //-----------------Function For LINQ Join : End------------------//
 

@@ -2,6 +2,7 @@
 /// <reference path="../../typings/jQuery/jquery.d.ts" />
 
 module EmployeeAppExtension {
+   
     export interface IPathwayScope extends ng.IScope {
         loading: boolean;
         loadingTask: boolean;
@@ -15,7 +16,9 @@ module EmployeeAppExtension {
         Wfh: boolean;
 
     }
+    
 
+    //----------------- Controller : Start ------------------//
     export class EmployeeCtrl extends wp.angularBase.BaseCtrl implements angular.IController {
 
 
@@ -42,19 +45,40 @@ module EmployeeAppExtension {
 
         private init(): void {
         }
+        //-----------------Function to Add Employee : Start ------------------//
         AddEmployee = () => {
             this.dataSvc.AddEmployee(this.$scope.project).then((data) => {
                 console.log(data);
                 this.showMessage("Emplyee Added Sucessfully");
                 this.$scope.project = null;
-               
+                this.GotoList();
             }).catch((error) => {
                 console.log(error);
             }).finally(() => {
 
             })
         }
+        //-----------------Function to Add Employee : End ------------------//
+
+        //-----------------Function to Get List : Start ------------------//
+        employeeList: IEmployeeModel[];
+        GetEmployeeList = () => {
+            this.dataSvc.GetEmployeeList(this.$scope.project).then((data) => {
+                var Employee: String[] = new Array(100);
+                this.employeeList = data;
+                console.log(data);
+            }).catch((error) => {
+                console.log(error);
+            }).finally(() => {
+
+            })
+        }
+        //-----------------Function to Get List : End ------------------//
+        GotoList = () => {
+            window.location.href = "/Employee/List/"
+        }
     }
+    //----------------- Controller : End ------------------//
 
     EmployeeCtrl.$inject = ['$scope', 'EmployeeDataService', '$timeout', '$mdDialog', '$mdSelect', '$mdToast'];
 

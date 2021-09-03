@@ -59,29 +59,13 @@ var EmployeeAppExtension;
                 }).finally(function () {
                 });
             };
+            //-----------------Function For LINQ Order : End------------------//
+            //-----------------Function For LINQ Group : Start------------------//
             _this.Grouping = function () {
-                _this.dataSvc.Grouping(_this.$scope.project).then(function (data) {
-                    var Employee = new Array(100);
-                    _this.grouplist = data;
-                    _this.employeeList = data;
-                    console.log(data);
-                    _this.bindEmployeeGrid();
-                }).catch(function (error) {
-                    console.log(error);
-                }).finally(function () {
-                });
+                window.location.href = "/Employee/Grouping/";
             };
             _this.Joining = function () {
-                _this.dataSvc.Joining(_this.$scope.project).then(function (data) {
-                    var Employee = new Array(100);
-                    _this.grouplist = data;
-                    _this.employeeList = data;
-                    console.log(data);
-                    _this.bindEmployeeGrid();
-                }).catch(function (error) {
-                    console.log(error);
-                }).finally(function () {
-                });
+                window.location.href = "/Employee/Joining/";
             };
             //-----------------Function For LINQ Join : End------------------//
             //-----------------DevExtme Datagrid : Start------------------//

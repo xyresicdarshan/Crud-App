@@ -17,11 +17,13 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var EmployeeAppExtension;
 (function (EmployeeAppExtension) {
+    //----------------- Controller : Start ------------------//
     var ViewCtrl = /** @class */ (function (_super) {
         __extends(ViewCtrl, _super);
         function ViewCtrl($scope, dataSvc, $timeout, $mdDialog, $mdSelect, $mdToast) {
             var _this = _super.call(this, $scope, $mdToast) || this;
             _this.dataSvc = dataSvc;
+            //-----------------Function To View_Employee : Start ------------------//
             _this.ViewEmployee = function (id) {
                 console.log(id);
                 _this.dataSvc.GetEmployee(id).then(function (data) {
@@ -32,15 +34,22 @@ var EmployeeAppExtension;
                 }).finally(function () {
                 });
             };
+            //-----------------Function For View_Employee : End ------------------//
+            //-----------------Function To Update_Employee : Start ------------------//
             _this.UpdateEmployee = function () {
                 _this.dataSvc.UpdateEmployee(_this.$scope.project).then(function (data) {
                     console.log(data);
                     _this.showMessage("Updated Sucesfully");
+                    _this.GotoList();
                 }).catch(function (error) {
                     console.log(error);
                     _this.showMessage("Updated Error");
                 }).finally(function () {
                 });
+            };
+            //-----------------Function To Update_Employee : End ------------------//
+            _this.GotoList = function () {
+                window.location.href = "/Employee/List/";
             };
             _this.$scope = $scope;
             _this.EmployeeId = $("#hdnid").val();
@@ -55,6 +64,7 @@ var EmployeeAppExtension;
         return ViewCtrl;
     }(wp.angularBase.BaseCtrl));
     EmployeeAppExtension.ViewCtrl = ViewCtrl;
+    //----------------- Controller : End ------------------//
     ViewCtrl.$inject = ['$scope', 'EmployeeDataService', '$timeout', '$mdDialog', '$mdSelect', '$mdToast'];
     var app = angular.module("EmployeeApp", ['ngMaterial', 'ngMessages', 'ngSanitize']);
     app.factory('EmployeeDataService', ['$http', '$q', EmployeeAppExtension.EmployeeDataService.EmployeeDataServiceFactory]);

@@ -9,17 +9,17 @@ namespace Crud_App.service
     public class EmployeeService
     {
         OrganisationEntities db;
-        private Mapper _mapper;
-        public EmployeeService(IMapper mapper)
-        {
-            _mapper = (Mapper)mapper;
-            db = new OrganisationEntities(); 
-        }
+        private Mapper mapper;
+        //public EmployeeService(IMapper mapper)
+        //{
+        //    _mapper = (Mapper)mapper;
+        //    db = new OrganisationEntities(); 
+        //}
 
         public int AddEmployee(EmployeeViewModel model)
         {
             Employee input = new Employee();
-            var EmpView = _mapper.Map<Employee>(input);
+            //input = mapper.Map<Employee, EmployeeViewModel>(model);
 
             /*{
                 EmployeeId = model.EmployeeId,
@@ -39,7 +39,7 @@ namespace Crud_App.service
             var inputs = db.Employees.OrderByDescending(s => s.EmployeeId).ToList();
             //List<EmployeeViewModel> ev = new List<EmployeeViewModel>();
 
-            var employeeView = _mapper.Map<List<EmployeeViewModel>>(inputs);
+            //var employeeView = mapper.Map<List<EmployeeViewModel>>(inputs);
             
             
             /*foreach (var input in inputs)
@@ -56,7 +56,7 @@ namespace Crud_App.service
                 };
                 ev.Add(EmployeeView);
             }*/
-            return employeeView;
+            return null;
         }
 
         public EmployeeViewModel GetEmployee(int id)
@@ -75,9 +75,9 @@ namespace Crud_App.service
                 //    Wfh = input.Wfh
                 //};
 
-                var EmployeeView = _mapper.Map<EmployeeViewModel>(input);
+                //var EmployeeView = mapper.Map<Employee, EmployeeViewModel>(input);
 
-                return EmployeeView;
+                return null;
             }
             else
             {
@@ -113,7 +113,7 @@ namespace Crud_App.service
             var input = db.Employees.Where(s => s.EmployeeId == id).FirstOrDefault();
             if (input != null)
             {
-                var EmployeeView = _mapper.Map<EmployeeViewModel>(input);
+                //var EmployeeView = mapper.Map<EmployeeViewModel, Employee>;
                 db.Employees.Remove(input);
                 return db.SaveChanges();
             }
@@ -124,3 +124,7 @@ namespace Crud_App.service
         }
     }
 }
+
+
+
+

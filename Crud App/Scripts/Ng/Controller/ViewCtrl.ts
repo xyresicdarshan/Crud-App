@@ -17,7 +17,7 @@ module EmployeeAppExtension {
 
         project: IEmployeeModel;
     }
-
+    //----------------- Controller : Start ------------------//
     export class ViewCtrl extends wp.angularBase.BaseCtrl implements angular.IController {
 
 
@@ -50,7 +50,7 @@ module EmployeeAppExtension {
 
         private init(): void {
         }
-
+        //-----------------Function To View_Employee : Start ------------------//
         ViewEmployee = (id: number) => {
             console.log(id);
             this.dataSvc.GetEmployee(id).then((data) => {
@@ -62,21 +62,30 @@ module EmployeeAppExtension {
 
             })
         }
+        //-----------------Function For View_Employee : End ------------------//
 
+
+        //-----------------Function To Update_Employee : Start ------------------//
         UpdateEmployee = () => {
             this.dataSvc.UpdateEmployee(this.$scope.project).then((data) => {
                 console.log(data);
-                    this.showMessage("Updated Sucesfully")
+                this.showMessage("Updated Sucesfully")
+                this.GotoList();
             }).catch((error) => {
                 console.log(error);
                 this.showMessage("Updated Error")
             }).finally(() => {
 
             })
-          
+        }
+         //-----------------Function To Update_Employee : End ------------------//
+        GotoList = () => {
+            window.location.href = "/Employee/List/"
         }
 
     }
+    //----------------- Controller : End ------------------//
+
     ViewCtrl.$inject = ['$scope', 'EmployeeDataService', '$timeout', '$mdDialog', '$mdSelect', '$mdToast'];
 
     var app = angular.module("EmployeeApp", ['ngMaterial', 'ngMessages', 'ngSanitize']);
